@@ -1,13 +1,17 @@
 import express, { Application, Request, Response } from 'express'
+import { AppController } from './app.controller'
 import config from '../config'
 import * as dotenv from 'dotenv'
 
 dotenv.config()
 
 const app: Application = express()
+const appController = new AppController()
 
-app.use('/', (req: Request, res: Response) => {
-  res.send('Hello world!')
+app.use(express.json())
+
+app.post('/search', (req: Request, res: Response) => {
+  appController.search(req, res)
 })
 
 app.listen(config.AppPort, (): void => {

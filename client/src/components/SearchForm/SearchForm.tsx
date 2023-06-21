@@ -63,8 +63,16 @@ function SearchForm() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label>Email</label>
-          <input {...register('email', { required: true })} />
-          {errors.email && <span>This field is required</span>}
+          <input
+            {...register('email', {
+              required: 'This field is required',
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: 'Invalid email address',
+              },
+            })}
+          />
+          {errors.email && <span>{errors.email.message}</span>}
         </div>
         <div>
           <label>Number</label>

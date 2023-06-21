@@ -17,3 +17,5 @@ app.post('/search', (req: Request, res: Response) => {
 app.listen(config.AppPort, (): void => {
   console.log(`Server running on ${config.AppHost}:${config.AppPort}/`)
 })
+
+export default app

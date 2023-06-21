@@ -77,9 +77,7 @@ function SearchForm() {
           />
         </div>
         {error && <p>{error}</p>}
-        <button type="submit" disabled={isLoading}>
-          {isLoading ? 'Sending...' : 'Send'}
-        </button>
+        <button type="submit">Send</button>
       </form>
     </>
   )

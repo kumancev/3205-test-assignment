@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import axios, { CancelTokenSource } from 'axios'
 import api from '@api/config'
+import UserList, { UserData } from '@components/UsersList/UserList'
 
 type Inputs = {
   email: string
@@ -15,6 +16,7 @@ function SearchForm() {
     formState: { errors },
     reset,
   } = useForm<Inputs>()
+  const [items, setItems] = useState<Array<UserData> | undefined>()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const cancelTokenSource = useRef<CancelTokenSource | null>(null)
@@ -42,16 +44,16 @@ function SearchForm() {
       })
 
       console.log(response.data)
+      setItems(response.data)
 
       reset()
+      setIsLoading(false)
     } catch (error) {
       if (axios.isCancel(error)) {
         console.log('Request canceled', error.message)
       } else {
         setError('An error occurred while sending data')
       }
-    } finally {
-      setIsLoading(false)
     }
   }
 
@@ -78,6 +80,7 @@ function SearchForm() {
         </div>
         {error && <p>{error}</p>}
         <button type="submit">Send</button>
+        {isLoading ? <p>Loading...</p> : <UserList data={items} />}
       </form>
     </>
   )

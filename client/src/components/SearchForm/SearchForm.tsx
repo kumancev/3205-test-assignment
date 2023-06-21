@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import axios, { CancelTokenSource } from 'axios'
-import api from '../../api/config'
+import api from '@api/config'
 
 type Inputs = {
   email: string

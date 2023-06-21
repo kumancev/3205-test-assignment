@@ -17,8 +17,6 @@ export class AppService {
   }
 
   private searchInJson(email: string, number: string): DataItem[] {
-    return data.filter(
-      (item) => item.email.includes(email) || item.number.includes(number)
-    )
+    return data.filter((item) => item.email === email || item.number === number)
   }
 }

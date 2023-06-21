@@ -1,9 +1,10 @@
 import './App.css'
+import SearchForm from './components/SearchForm/SearchForm'
 
 function App() {
   return (
     <>
-      <h1>Hello</h1>
+      <SearchForm />
     </>
   )
 }

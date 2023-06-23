@@ -27,8 +27,6 @@ function Search() {
       setIsLoading(true)
       setError('')
 
-      console.log(data)
-
       if (cancelTokenSource.current) {
         cancelTokenSource.current.cancel('Operation canceled by the user')
       }
@@ -44,7 +42,6 @@ function Search() {
         cancelToken: cancelTokenSource.current.token,
       })
 
-      console.log(response.data)
       setItems(response.data)
 
       reset()

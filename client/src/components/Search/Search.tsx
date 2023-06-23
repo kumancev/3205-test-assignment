@@ -79,7 +79,13 @@ function Search() {
             <label className="form__label">Number:</label>
             <input
               className="form__input"
-              {...register('number')}
+              {...register('number', {
+                required: false,
+                pattern: {
+                  value: /^\d{2}-\d{2}-\d{2}$/,
+                  message: 'Invalid phone number format (XX-XX-XX)',
+                },
+              })}
               onChange={(e) => {
                 const { value } = e.target
                 e.target.value = value
@@ -87,6 +93,7 @@ function Search() {
                   .replace(/(\d{2})(?=\d)/g, '$1-')
               }}
             />
+            {errors.number && <span>{errors.number.message}</span>}
           </div>
           {error && <p>{error}</p>}
           <button className="form__button" type="submit">

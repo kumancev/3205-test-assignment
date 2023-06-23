@@ -1,0 +1,36 @@
+#root {
+  text-align: center;
+  background-color: aquamarine;
+}
+
+.wrapper {
+  position: absolute;
+  width: 900px;
+  padding: 1rem;
+  height: 90vh;
+  left: calc(50% - 900px / 2);
+  top: 1.5rem;
+  background-color: #fff;
+  border-radius: 1.5rem;
+}
+
+.wrapper:hover,
+.wrapper:focus,
+.wrapper:active {
+  box-shadow: 12px 12px 2px 1px rgba(72, 0, 78, 0.2);
+  transition: box-shadow .125s ease;
+}
+
+@media screen and (max-width: 920px) {
+  .wrapper {
+    width: 580px;
+    left: calc(50% - 580px / 2);
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .wrapper {
+    width: 360px;
+    left: calc(50% - 360px / 2);
+  }
+}

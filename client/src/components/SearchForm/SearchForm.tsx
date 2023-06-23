@@ -3,6 +3,7 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import axios, { CancelTokenSource } from 'axios'
 import api from '@api/config'
 import UserList, { UserData } from '@components/UsersList/UserList'
+import './searchForm.css'
 
 type Inputs = {
   email: string
@@ -59,11 +60,12 @@ function SearchForm() {
 
   return (
     <>
-      <h1>Form</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label>Email</label>
+      <h1>Find members</h1>
+      <form className="form" onSubmit={handleSubmit(onSubmit)}>
+        <div className="form__wrapper">
+          <label className="form__label">Email:</label>
           <input
+            className="form__input"
             {...register('email', {
               required: 'This field is required',
               pattern: {
@@ -73,10 +75,9 @@ function SearchForm() {
             })}
           />
           {errors.email && <span>{errors.email.message}</span>}
-        </div>
-        <div>
-          <label>Number</label>
+          <label className="form__label">Number:</label>
           <input
+            className="form__input"
             {...register('number')}
             onChange={(e) => {
               const { value } = e.target
@@ -87,9 +88,11 @@ function SearchForm() {
           />
         </div>
         {error && <p>{error}</p>}
-        <button type="submit">Send</button>
-        {isLoading ? <p>Loading...</p> : <UserList data={items} />}
+        <button className="form__button" type="submit">
+          Send
+        </button>
       </form>
+      {isLoading ? <p>Loading...</p> : <UserList data={items} />}
     </>
   )
 }

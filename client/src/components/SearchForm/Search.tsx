@@ -10,7 +10,7 @@ type Inputs = {
   number: string
 }
 
-function SearchForm() {
+function Search() {
   const {
     register,
     handleSubmit,
@@ -59,42 +59,49 @@ function SearchForm() {
   }
 
   return (
-    <>
-      <h1>Find members</h1>
-      <form className="form" onSubmit={handleSubmit(onSubmit)}>
-        <div className="form__wrapper">
-          <label className="form__label">Email:</label>
-          <input
-            className="form__input"
-            {...register('email', {
-              required: 'This field is required',
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: 'Invalid email address',
-              },
-            })}
-          />
-          {errors.email && <span>{errors.email.message}</span>}
-          <label className="form__label">Number:</label>
-          <input
-            className="form__input"
-            {...register('number')}
-            onChange={(e) => {
-              const { value } = e.target
-              e.target.value = value
-                .replace(/\D/g, '')
-                .replace(/(\d{2})(?=\d)/g, '$1-')
-            }}
-          />
-        </div>
-        {error && <p>{error}</p>}
-        <button className="form__button" type="submit">
-          Send
-        </button>
-      </form>
-      {isLoading ? <p>Loading...</p> : <UserList data={items} />}
-    </>
+    <div className="search__wrapper">
+      <section className="form__section">
+        <h1>Find members</h1>
+        <form className="form" onSubmit={handleSubmit(onSubmit)}>
+          <div className="form__wrapper">
+            <label className="form__label">Email:</label>
+            <input
+              className="form__input"
+              {...register('email', {
+                required: 'This field is required',
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: 'Invalid email address',
+                },
+              })}
+            />
+            {errors.email && <span>{errors.email.message}</span>}
+            <label className="form__label">Number:</label>
+            <input
+              className="form__input"
+              {...register('number')}
+              onChange={(e) => {
+                const { value } = e.target
+                e.target.value = value
+                  .replace(/\D/g, '')
+                  .replace(/(\d{2})(?=\d)/g, '$1-')
+              }}
+            />
+          </div>
+          {error && <p>{error}</p>}
+          <button className="form__button" type="submit">
+            Search
+          </button>
+        </form>
+      </section>
+      {isLoading && <p className="text__loader">Loading...</p>}
+      {items && (
+        <section className="data__section">
+          <UserList data={items} />
+        </section>
+      )}
+    </div>
   )
 }
 
-export default SearchForm
+export default Search

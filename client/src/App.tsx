@@ -1,10 +1,10 @@
-import SearchForm from '@components/SearchForm/SearchForm'
+import Search from '@components/SearchForm/Search'
 import './app.css'
 
 function App() {
   return (
-    <div className='wrapper'>
-      <SearchForm />
+    <div className="wrapper">
+      <Search />
     </div>
   )
 }

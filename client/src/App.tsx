@@ -1,4 +1,4 @@
-import Search from '@components/SearchForm/Search'
+import Search from '@components/Search/Search'
 import './app.css'
 
 function App() {

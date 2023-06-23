@@ -3,7 +3,7 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import axios, { CancelTokenSource } from 'axios'
 import api from '@api/config'
 import UserList, { UserData } from '@components/UsersList/UserList'
-import './searchForm.css'
+import './search.css'
 
 type Inputs = {
   email: string

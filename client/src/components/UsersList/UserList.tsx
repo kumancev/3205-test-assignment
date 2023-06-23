@@ -13,10 +13,13 @@ export type UserListProps = {
 function UserList({ data }: UserListProps) {
   return (
     <div className="list__wrapper">
-      {data &&
+      {data && data.length > 0 ? (
         data.map((user) => (
           <User email={user.email} number={user.number} key={user.number} />
-        ))}
+        ))
+      ) : (
+        <p>User not found</p>
+      )}
     </div>
   )
 }

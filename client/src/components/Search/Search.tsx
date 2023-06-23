@@ -102,7 +102,7 @@ function Search() {
         </form>
       </section>
       {isLoading && <p className="text__loader">Loading...</p>}
-      {items && (
+      {items && !isLoading && (
         <section className="data__section">
           <UserList data={items} />
         </section>

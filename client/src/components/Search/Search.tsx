@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
-import axios, { CancelTokenSource } from 'axios'
+import axios from 'axios'
 import api from '@api/config'
 import UserList, { UserData } from '@components/UsersList/UserList'
 import './search.css'
@@ -20,18 +20,18 @@ function Search() {
   const [items, setItems] = useState<Array<UserData> | undefined>()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
-  const cancelTokenSource = useRef<CancelTokenSource | null>(null)
+  const abortControllerRef = useRef<AbortController | null>(null)
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
       setIsLoading(true)
       setError('')
 
-      if (cancelTokenSource.current) {
-        cancelTokenSource.current.cancel('Operation canceled by the user')
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort('Operation canceled by the user')
       }
 
-      cancelTokenSource.current = axios.CancelToken.source()
+      abortControllerRef.current = new AbortController()
 
       const formattedData = {
         ...data,
@@ -39,7 +39,7 @@ function Search() {
       }
 
       const response = await api.post('/search', formattedData, {
-        cancelToken: cancelTokenSource.current.token,
+        signal: abortControllerRef.current.signal,
       })
 
       setItems(response.data)

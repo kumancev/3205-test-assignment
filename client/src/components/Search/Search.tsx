@@ -50,6 +50,7 @@ function Search() {
       if (axios.isCancel(error)) {
         console.log('Request canceled', error.message)
       } else {
+        setIsLoading(false)
         setError('An error occurred while sending data')
       }
     }

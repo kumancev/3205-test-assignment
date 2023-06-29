@@ -12,7 +12,6 @@ export class AppService {
       return this.searchInJson(email, number)
     } catch (error) {
       console.error(error)
-      throw new Error('Search error')
     }
   }
 
